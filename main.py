@@ -22,7 +22,7 @@ def update_messages_count(user_id):
 @bot.message_handler(commands=["start"])
 def start(message):
     user_id = message.from_user.id
-    userfirst = message.from_user.firstname
+    userfirst = message.from_user.first_name
     username = message.from_user.username
     bot.reply_to(message, f"Привет, {userfirst}!")
 
