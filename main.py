@@ -12,8 +12,9 @@ logger.setLevel(logging.DEBUG)
 
 
 
-bot.send_message(802515951, 'hello')
-
+@bot.message_handler(commands=['start'])
+def message():
+    bot.send_message(message, 'hellp')
 
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
