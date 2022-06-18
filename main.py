@@ -115,7 +115,7 @@ def handle_text(message):
                             top10 = types.InlineKeyboardMarkup()
                             button = types.InlineKeyboardButton(text='🔝 Toп 10 ', callback_data=98765432345678765432)
                             top10.add(button)
-                            caption = f"*👤 {item[3].strip()} - @{item[1].strip()}\n➖➖➖➖➖\n📊 Твоя личная статистика\n✅ Всего одобрено в группу: {item[2]}\n➖➖➖➖➖\n🌄 Фотографии: {item[2]}\n📹 Видео: {item[2]}\n🎵 Музыка: {item[2]}\n➖➖➖➖➖\n*_↕️ В стадии разработки..._"
+                            caption = f"{item[2]}"
                             bot.send_message(message.chat.id, caption,  parse_mode='Markdown', reply_markup=top10)
         else:
             cap = random.choice([('*📹 Отправь мне видео...*'),('*🌄 Жду фотографии...*'), ('*🎵 Скинь свой любимый трек*')])
