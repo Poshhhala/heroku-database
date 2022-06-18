@@ -22,15 +22,22 @@ def update_messages_count(user_id):
 @bot.message_handler(commands=["start"])
 def start(message):
     user_id = message.from_user.id
+    userfirst = message.from_user.firstname
     username = message.from_user.username
-    bot.reply_to(message, f"Hello, {username}!")
+    bot.reply_to(message, f"Привет, {userfirst}!")
 
     db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
     result = db_object.fetchone()
 
     if not result:
-        db_object.execute("INSERT INTO users(id, username, messages) VALUES (%s, %s, %s)", (user_id, username, 0))
-        db_connection.commit()
+        if username == None:
+            db_object.execute("INSERT INTO users(id, username, messages, firstname) VALUES (%s, %s, %s, %s)",
+                              (user_id, "None", 0, userfirst))
+            db_connection.commit()
+        else:
+            db_object.execute("INSERT INTO users(id, username, messages, firstname) VALUES (%s, %s, %s, %s)",
+                              (user_id, username, 0, userfirst))
+            db_connection.commit()
 
     update_messages_count(user_id)
 
@@ -43,10 +50,10 @@ def get_stats(message):
     if not result:
         bot.reply_to(message, "No data...")
     else:
-        reply_message = "Топ 10 спамеров:\n"
-        for i, item in enumerate(result):
-            reply_message += f"{i + 1}. {item[1].strip()}: {item[2]} смс\n"
-        bot.reply_to(message, reply_message)
+            reply_message = "Топ 10 спамеров:\n"
+            for i, item in enumerate(result):
+                reply_message += f"{i + 1}. {item[3].strip()}: {item[2]} смс\n"
+            bot.reply_to(message, reply_message)
 
     update_messages_count(message.from_user.id)
 
