@@ -15,7 +15,8 @@ bot.send_message(802515951, 'hellp')
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.chat.id, 'It works!')
-
+    print(message.from_user.first_name)  # Имя
+    print(message.text)
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
 def redirect_message():
