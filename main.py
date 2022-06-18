@@ -116,6 +116,7 @@ def handle_text(message):
                 bot.send_message(message.chat.id, cap, parse_mode='Markdown')
 
 
+
 #@bot.message_handler(commands=["stats"])
 #def get_stats(message):
 #    db_object.execute("SELECT * FROM users ORDER BY messages DESC LIMIT 10")
