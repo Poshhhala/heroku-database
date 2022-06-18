@@ -116,7 +116,7 @@ def handle_text(message):
                             button = types.InlineKeyboardButton(text='🔝 Toп 10 ', callback_data=98765432345678765432)
                             top10.add(button)
 
-                            bot.send_message(message.chat.id, f"{item[0]}",  parse_mode='Markdown', reply_markup=top10)
+                            bot.send_message(message.chat.id, f"{item[1]}",  parse_mode='Markdown', reply_markup=top10)
         else:
             cap = random.choice([('*📹 Отправь мне видео...*'),('*🌄 Жду фотографии...*'), ('*🎵 Скинь свой любимый трек*')])
             bot.delete_message(message.chat.id, message.message_id)
