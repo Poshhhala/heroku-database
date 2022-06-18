@@ -10,12 +10,6 @@ logger = telebot.logger
 logger.setLevel(logging.DEBUG)
 
 
-bot.send_message(802515951, 'hellp')
-
-
-
-
-
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.chat.id, 'It works!')
