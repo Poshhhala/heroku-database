@@ -13,7 +13,7 @@ logger.setLevel(logging.DEBUG)
 
 
 @bot.message_handler(commands=['start'])
-def message():
+def start(message):
     bot.send_message(message, 'hellp')
 
 
