@@ -25,7 +25,8 @@ def start(message):
     userfirst = message.from_user.first_name
     username = message.from_user.username
     photo = 'https://vk.com/deluxe_in_mainstream?z=photo-58122416_457239128%2Falbum-58122416_00%2Frev'
-    bot.send_photo(message.from_user.id, photo)
+    dist = 'Привет, бот на стадии разработки...'
+    bot.send_photo(message.from_user.id, photo , dist)
     bot.reply_to(message, f"Привет, {userfirst}!")
 
     db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
