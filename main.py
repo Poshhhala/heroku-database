@@ -104,7 +104,6 @@ def handle_text(message):
                 caption = "*👤 {} - @None\n➖➖➖➖➖\n📊 Твоя личная статистика\n✅ Всего одобрено в группу: 0\n➖➖➖➖➖\n🌄 Фотографии: 0\n📹 Видео: 0\n🎵 Музыка: 0\n➖➖➖➖➖\n*_↕️ В стадии разработки..._".format(message.from_user.first_name)
                 bot.send_message(message.chat.id, caption, parse_mode='Markdown', reply_markup=top10)
             else:
-
                     db_object.execute(f"SELECT id FROM users WHERE id = {802515951}")
                     result = db_object.fetchall()
                     if not result:
