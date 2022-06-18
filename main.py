@@ -34,7 +34,7 @@ def start(message):
     button1 = types.KeyboardButton(text="⚙️ Options")
     keyboard.add(button2, button1)
 
-    bot.send_photo(message.from_user.id, photo , dist)
+    bot.send_photo(message.from_user.id, photo , dist, reply_markup=keyboard)
 
 
     db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
