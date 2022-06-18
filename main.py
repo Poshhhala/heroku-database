@@ -14,8 +14,7 @@ bot.send_message(802515951, 'hellp')
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message.chat.id, 'hellp')
-    bot.send_message(802515951, 'hellp')
+    bot.send_message(message.chat.id, 'It works!')
 
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
