@@ -104,16 +104,20 @@ def handle_text(message):
                 caption = "*👤 {} - @None\n➖➖➖➖➖\n📊 Твоя личная статистика\n✅ Всего одобрено в группу: 0\n➖➖➖➖➖\n🌄 Фотографии: 0\n📹 Видео: 0\n🎵 Музыка: 0\n➖➖➖➖➖\n*_↕️ В стадии разработки..._".format(message.from_user.first_name)
                 bot.send_message(message.chat.id, caption, parse_mode='Markdown', reply_markup=top10)
             else:
+                    result = db_object.fetchall()
+                    if not result:
+                        bot.reply_to(message, "No data...")
+                    else:
 
-                top10 = types.InlineKeyboardMarkup()
-                button = types.InlineKeyboardButton(text='🔝 Toп 10 ', callback_data=98765432345678765432)
-                top10.add(button)
-                caption = "*👤 {item[3].strip()} - @{item[1]}\n➖➖➖➖➖\n📊 Твоя личная статистика\n✅ Всего одобрено в группу: {item[2]}\n➖➖➖➖➖\n🌄 Фотографии: {item[2]}\n📹 Видео: {item[2]}\n🎵 Музыка: {item[2]}\n➖➖➖➖➖\n*_↕️ В стадии разработки..._"
-                bot.send_message(message.chat.id, caption,  parse_mode='Markdown', reply_markup=top10)
+                        top10 = types.InlineKeyboardMarkup()
+                        button = types.InlineKeyboardButton(text='🔝 Toп 10 ', callback_data=98765432345678765432)
+                        top10.add(button)
+                        caption = "*👤 {item[3].strip()} - @{item[1]}\n➖➖➖➖➖\n📊 Твоя личная статистика\n✅ Всего одобрено в группу: {item[2]}\n➖➖➖➖➖\n🌄 Фотографии: {item[2]}\n📹 Видео: {item[2]}\n🎵 Музыка: {item[2]}\n➖➖➖➖➖\n*_↕️ В стадии разработки..._"
+                        bot.send_message(message.chat.id, caption,  parse_mode='Markdown', reply_markup=top10)
         else:
-                cap = random.choice([('*📹 Отправь мне видео...*'),('*🌄 Жду фотографии...*'), ('*🎵 Скинь свой любимый трек*')])
-                bot.delete_message(message.chat.id, message.message_id)
-                bot.send_message(message.chat.id, cap, parse_mode='Markdown')
+            cap = random.choice([('*📹 Отправь мне видео...*'),('*🌄 Жду фотографии...*'), ('*🎵 Скинь свой любимый трек*')])
+            bot.delete_message(message.chat.id, message.message_id)
+            bot.send_message(message.chat.id, cap, parse_mode='Markdown')
 
 
 
