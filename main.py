@@ -43,9 +43,9 @@ def get_stats(message):
     if not result:
         bot.reply_to(message, "No data...")
     else:
-        reply_message = "- Top flooders:\n"
+        reply_message = "Топ 10 спамеров:\n"
         for i, item in enumerate(result):
-            reply_message += f"[{i + 1}] {item[1].strip()} ({item[0]}) : {item[2]} messages.\n"
+            reply_message += f"{i + 1}. {item[1].strip()}: {item[2]} смс\n"
         bot.reply_to(message, reply_message)
 
     update_messages_count(message.from_user.id)
