@@ -99,18 +99,6 @@ def handle_text(message):
                          reply_markup=keyboard, parse_mode='Markdown')
 
         elif message.text == "👤 Profile":
-            if message.from_user.username == None:
-                id = message.from_user.id
-                db_object.execute("SELECT * FROM users WHERE id = {0}".format(id))
-                result = db_object.fetchall()
-                if not result:
-                    bot.reply_to(message, "No data...")
-                else:
-                    for item in result:
-                        bot.send_message(message.from_user.id, f"{item[3]}")
-
-                update_messages_count(message.from_user.id)
-            else:
 
                 id = message.from_user.id
                 db_object.execute("SELECT * FROM users WHERE id = {0}".format(id))
@@ -120,7 +108,8 @@ def handle_text(message):
                 else:
                     for item in result:
                         bot.send_message(message.from_user.id, f"{item[1]}")
-
+                        caption = f"*👤 {item[3]} - @{item[2]}\n➖➖➖➖➖\n📊 Твоя личная статистика\n✅ Всего одобрено в группу: {item[7]}\n➖➖➖➖➖\n🌄 Фотографии: {item[4]}\n📹 Видео: {item[5]}\n🎵 Музыка: {item[6]}\n➖➖➖➖➖\n*"
+                        bot.send_message(message.chat.id, caption, parse_mode='Markdown')
                 update_messages_count(message.from_user.id)
         else:
                 cap = random.choice([('*📹 Отправь мне видео...*'),('*🌄 Жду фотографии...*'), ('*🎵 Скинь свой любимый трек*')])
