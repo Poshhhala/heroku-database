@@ -60,6 +60,7 @@ def start(message):
             db_connection.commit()
     # если есть
     update_messages_count(user_id)
+    db_connection.commit()
 
 @bot.callback_query_handler(func=lambda call: True)
 def iqchery(call):
@@ -240,10 +241,12 @@ def handle_text(message):
             keyboard.add(button2, button3)
 
             bot.reply_to(message, "*Вернул в основное меню !*", reply_markup=keyboard, parse_mode='Markdown')
+            db_connection.commit()
 
 
         elif message.text == "ℹ️Test":
             bot.reply_to(message, "*Бот активен...\n*", parse_mode='Markdown')
+            db_connection.commit()
 
         elif message.text == "🗂 More":
 
@@ -260,7 +263,7 @@ def handle_text(message):
 
             bot.send_message(message.chat.id, "*Открыл основное меню!\n➖➖➖➖➖\nНекоторые функции могут быть ещё недоступны...\n➖➖➖➖➖\n*",
                          reply_markup=keyboard, parse_mode='Markdown')
-
+            db_connection.commit()
         elif message.text == "👤 Profile":
 
                 id = message.from_user.id
@@ -274,10 +277,12 @@ def handle_text(message):
                         caption = f"*📊 Твоя личная информация\n➖➖➖➖➖\n👤 {item[3]}👥 @{item[1]}⬆️ Информация может быть устарелой\n➖➖➖➖➖\nОтправлено боту:\n🌄 Фотографии: {item[4]}\n📹 Видео: {item[5]}\n🎵 Музыка: {item[6]}\n➖➖➖➖➖\n✅ Всего одобрено в группу: {item[7]}*"
                         bot.send_message(message.chat.id, caption, parse_mode='Markdown')
                 update_messages_count(message.from_user.id)
+                db_connection.commit()
         else:
                 cap = random.choice([('*📹 Отправь мне видео...*'),('*🌄 Жду фотографии...*'), ('*🎵 Скинь свой любимый трек*')])
                 bot.delete_message(message.chat.id, message.message_id)
                 bot.send_message(message.chat.id, cap, parse_mode='Markdown')
+
 
 # @bot.message_handler(commands=["stats"])
 # def get_stats(message):
@@ -372,10 +377,6 @@ def audio(message):
             bot.send_audio(Photobybot2, idmusic, caption, reply_markup=button, parse_mode='Markdown')
             db_connection.commit()
 
-@bot.message_handler(func=lambda message: True, content_types=["text"])
-def message_from_user(message):
-    user_id = message.from_user.id
-    update_messages_count(user_id)
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])
 def redirect_message():
