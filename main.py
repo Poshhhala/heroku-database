@@ -143,8 +143,7 @@ def handle_text(message):
 #     update_messages_count(message.from_user.id)
 #
 
-@bot.message_handler(commands=["info"])
-def get_stats(message):
+
 
 
 
