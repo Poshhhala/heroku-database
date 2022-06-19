@@ -10,7 +10,7 @@ import random
 Photobybot2 = -387904708
 Chanal = -1001270568536
 admin = 802515951
-UrlChanal = 'https://t.me/lilhomebychill'
+UrlChanal = 'https://t.me/paparaccii'
 
 bot = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)
