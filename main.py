@@ -38,10 +38,9 @@ def start(message):
 
     button1 = types.KeyboardButton(text="ℹ️Test")
     button2 = types.KeyboardButton(text="👤 Profile")
-    button3 = types.KeyboardButton(text="🗂 More")
 
-    keyboard.add(button1)
-    keyboard.add(button2,button3)
+
+    keyboard.add(button1,button2)
 
     bot.send_photo(message.from_user.id, photo , dist, reply_markup=keyboard)
 
@@ -141,10 +140,8 @@ def handle_text(message):
 
             button1 = types.KeyboardButton(text="ℹ️Test")
             button2 = types.KeyboardButton(text="👤 Profile")
-            button3 = types.KeyboardButton(text="🗂 More")
 
-            keyboard.add(button1)
-            keyboard.add(button2, button3)
+            keyboard.add(button1, button2)
 
             bot.reply_to(message, "*Вернул в основное меню !*", reply_markup=keyboard, parse_mode='Markdown')
             db_connection.commit()
@@ -154,22 +151,6 @@ def handle_text(message):
             bot.reply_to(message, "*Бот активен...\n*", parse_mode='Markdown')
             db_connection.commit()
 
-        elif message.text == "🗂 More":
-
-            keyboard = types.InlineKeyboardMarkup()
-
-            button1 = types.InlineKeyboardButton("📂 Правила", callback_data='945678765', url='https://telegra.ph/Pravila-postinga-v-I061UNMAIN-11-04')
-            button2 = types.InlineKeyboardButton("📑 Что умеет бот?", callback_data='1')
-            button3 = types.InlineKeyboardButton("⚜ Администрация", callback_data='6')
-
-            keyboard.add(button2)
-            keyboard.add(button1)
-            keyboard.add(button3)
-
-
-            bot.send_message(message.chat.id, "*Открыл основное меню!\n➖➖➖➖➖\nНекоторые функции могут быть ещё недоступны...\n➖➖➖➖➖\n*",
-                         reply_markup=keyboard, parse_mode='Markdown')
-            db_connection.commit()
         elif message.text == "👤 Profile":
 
                 id = message.from_user.id
