@@ -303,7 +303,7 @@ def photo(message):
                 button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10)
                 button.add(button1)
 
-                caption = "{0}".format(message.from_user.first_name)
+                caption = "{0}".format(message.from_user.id)
 
                 idphoto = message.photo[0].file_id
                 user_id = message.from_user.id
@@ -343,7 +343,7 @@ def video(message):
             idvideo = message.video.file_id
             user_id = message.from_user.id
             db_object.execute(f"UPDATE users SET video = video + 1 WHERE id = {user_id}")
-            caption = "{0}".format(message.from_user.first_name)
+            caption = "{0}".format(message.from_user.id)
 
             bot.reply_to(message, random.choice(["*✅ - Миссия выполнена, продолжай!*",
                                              "*✅ - Хорошая работа, Олег!*",
@@ -377,7 +377,7 @@ def audio(message):
             button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10111)
             button.add(button1)
 
-            caption = "{0}".format(message.from_user.first_name)
+            caption = "{0}".format(message.from_user.id)
 
             idmusic = message.audio.file_id
             user_id = message.from_user.id
