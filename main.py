@@ -64,155 +64,166 @@ def start(message):
 @bot.callback_query_handler(func=lambda call: True)
 def iqchery(call):
         if call.message:
+            id = call.message.caption
+            db_object.execute("SELECT * FROM users WHERE id = {0}".format(id))
+            result = db_object.fetchall()
+            if not result:
+                bot.reply_to(call.message, "No data...")
+            else:
+                for item in result:
+                        caption_os = f"*𝔭𝔞𝔭𝔞𝔯𝔞𝔠𝔶 🧛🏻 : {item[3]}*"
+                        caption_ok = f"*posted - by: {item[3]}*"
 
-            caption_os = "𝔭𝔞𝔭𝔞𝔯𝔞𝔠𝔶 🧛🏻 - by: {0}".format(call.message.caption)
-            caption_ok = "posted - by: {0}".format(call.message.caption)
+                        linktogroup = types.InlineKeyboardMarkup()
 
-            linktogroup = types.InlineKeyboardMarkup()
+                        linktogroup1 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌉', url='https://t.me/onlybabay_bot')
+                        linktogroup2 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌄', url='https://t.me/onlybabay_bot')
+                        linktogroup3 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌅', url='https://t.me/onlybabay_bot')
+                        linktogroup4 = types.InlineKeyboardButton(text='Поделиться своим контентом 🎆', url='https://t.me/onlybabay_bot')
+                        linktogroup5 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌇', url='https://t.me/onlybabay_bot')
 
-            linktogroup1 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌉', url='https://t.me/onlybabay_bot')
-            linktogroup2 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌄', url='https://t.me/onlybabay_bot')
-            linktogroup3 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌅', url='https://t.me/onlybabay_bot')
-            linktogroup4 = types.InlineKeyboardButton(text='Поделиться своим контентом 🎆', url='https://t.me/onlybabay_bot')
-            linktogroup5 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌇', url='https://t.me/onlybabay_bot')
+                        linktogroup.add(random.choice([linktogroup1, linktogroup2, linktogroup3, linktogroup4,linktogroup5]))
 
-            linktogroup.add(random.choice([linktogroup1, linktogroup2, linktogroup3, linktogroup4,linktogroup5]))
+                if call.data == '1': # Умения бота
 
-            if call.data == '1': # Умения бота
+                    exit1 = types.InlineKeyboardMarkup()
+                    butto1 = types.InlineKeyboardButton('◀️ Exit', callback_data= '8678967886')
+                    exit1.add(butto1)
 
-                exit1 = types.InlineKeyboardMarkup()
-                butto1 = types.InlineKeyboardButton('◀️ Exit', callback_data= '8678967886')
-                exit1.add(butto1)
+                    text1 = "*🤖 Умения бота:\n➖➖➖\nОтправка и Сохранение такого вида контента:\n➖➖➖\nФото ▫️ Видео ▫️ Музыка\n➖➖➖\nНекий % полученого контента - бот отправляет в канал.*"
+                    bot.edit_message_text(message_id= call.message.message_id, chat_id=call.message.chat.id, text= text1, reply_markup= exit1, parse_mode='Markdown')
 
-                text1 = "*🤖 Умения бота:\n➖➖➖\nОтправка и Сохранение такого вида контента:\n➖➖➖\nФото ▫️ Видео ▫️ Музыка\n➖➖➖\nНекий % полученого контента - бот отправляет в канал.*"
-                bot.edit_message_text(message_id= call.message.message_id, chat_id=call.message.chat.id, text= text1, reply_markup= exit1, parse_mode='Markdown')
+                if call.data == '6': # Кнопка администрации
 
-            if call.data == '6': # Кнопка администрации
+                    keyboard = types.InlineKeyboardMarkup()
 
-                keyboard = types.InlineKeyboardMarkup()
-
-                button1 = types.InlineKeyboardButton("Instagram.com",
+                    button1 = types.InlineKeyboardButton("Instagram.com",
                                                          url='https://www.instagram.com/lilromuill/?hl=ru')
-                button2 = types.InlineKeyboardButton("Telegram.org", url='https://t.me/lilchupaindesu')
-                butto1 = types.InlineKeyboardButton('◀️ Exit', callback_data='8678967886')
+                    button2 = types.InlineKeyboardButton("Telegram.org", url='https://t.me/lilchupaindesu')
+                    butto1 = types.InlineKeyboardButton('◀️ Exit', callback_data='8678967886')
 
-                keyboard.add(button1, button2)
-                keyboard.add(butto1)
+                    keyboard.add(button1, button2)
+                    keyboard.add(butto1)
 
-                bot.edit_message_text(chat_id= call.message.chat.id, message_id= call.message.message_id, text = "*Администрация ⛑\n- По вопросам размещение рекламы;\n- Вопросы сотрудничества;\n- Eсли у вас есть какие-то дополнительные идеи по поводу развития проекта;\n💌 Пишите: @lilchupaindesu👇*",
+                    bot.edit_message_text(chat_id= call.message.chat.id, message_id= call.message.message_id, text = "*Администрация ⛑\n- По вопросам размещение рекламы;\n- Вопросы сотрудничества;\n- Eсли у вас есть какие-то дополнительные идеи по поводу развития проекта;\n💌 Пишите: @lilchupaindesu👇*",
                                  parse_mode='Markdown', reply_markup=keyboard)
 
 
-            if call.data == '999':  # by people
-                idphoto = call.message.photo[0].file_id
+                if call.data == '999':  # by people
+                    db_object.execute(f"UPDATE users SET photo = photo + 1 WHERE id = {call.user_id}")
+                    idphoto = call.message.photo[0].file_id
+                    bot.send_photo(Chanal, idphoto, caption_os, parse_mode='Markdown')
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    db_connection.commit()
 
-                bot.send_photo(Chanal, idphoto, caption_os, parse_mode='Markdown')
-                bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                if call.data == '998':  # by people
+                    db_object.execute(f"UPDATE users SET video = video + 1 WHERE id = {call.user_id}")
+                    idvideo = call.message.video.file_id
+                    bot.send_video(Chanal, idvideo, None, caption_os, parse_mode='Markdown')
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    db_connection.commit()
 
-            if call.data == '998':  # by people
-                idvideo = call.message.video.file_id
+                if call.data == '997':  # by people
+                    db_object.execute(f"UPDATE users SET music = music + 1 WHERE id = {call.user_id}")
+                    idmusic = call.message.audio.file_id
+                    bot.send_audio(Chanal, idmusic, caption_os, parse_mode='Markdown')
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    db_connection.commit()
 
-                bot.send_video(Chanal, idvideo, None, caption_os, parse_mode='Markdown')
-                bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                if call.data == '100016781':  # by people + link
+                    db_object.execute(f"UPDATE users SET photo = photo + 1 WHERE id = {call.user_id}")
+                    idphoto = call.message.photo[0].file_id
+                    bot.send_photo(Chanal, idphoto, caption_os, reply_markup=linktogroup,parse_mode='Markdown')
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    db_connection.commit()
 
-            if call.data == '997':  # by people
-                idmusic = call.message.audio.file_id
+                if call.data == '100016783':  # by people + link
+                    db_object.execute(f"UPDATE users SET video = video + 1 WHERE id = {call.user_id}")
+                    idvideo = call.message.video.file_id
+                    bot.send_video(Chanal, idvideo, None, caption_os, reply_markup=linktogroup,parse_mode='Markdown')
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    db_connection.commit()
 
-                bot.send_audio(Chanal, idmusic, caption_os, parse_mode='Markdown')
-                bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                if call.data == '100016785':  # by people + link
+                    db_object.execute(f"UPDATE users SET music = music + 1 WHERE id = {call.user_id}")
+                    idmusic = call.message.audio.file_id
+                    bot.send_audio(Chanal, idmusic, caption_os, reply_markup=linktogroup, parse_mode='Markdown')
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    db_connection.commit()
 
+                if call.data == '10':  # vopros Photo
+                    button = telebot.types.InlineKeyboardMarkup()
 
-            if call.data == '100016781':  # by people + link
-                idphoto = call.message.photo[0].file_id
+                    button1 = types.InlineKeyboardButton(text="✅ - ʙʏ ᴍᴇ", callback_data=999)
+                    button2 = types.InlineKeyboardButton(text="ᴍᴇ + ʟɪɴᴋ", callback_data=100016781)
+                    button3 = types.InlineKeyboardButton(text="↩ - Exit", callback_data=11)
+                    button.add(button1, button2)
+                    button.add(button3)
 
-                bot.send_photo(Chanal, idphoto, caption_os, reply_markup=linktogroup,parse_mode='Markdown')
-                bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-            if call.data == '100016783':  # by people + link
-                idvideo = call.message.video.file_id
+                if call.data == '11':  # Exit s photo
+                    button = types.InlineKeyboardMarkup()
 
-                bot.send_video(Chanal, idvideo, None, caption_os, reply_markup=linktogroup,parse_mode='Markdown')
-                bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10)
+                    button.add(button1)
 
-            if call.data == '100016785':  # by people + link
-                idmusic = call.message.audio.file_id
+                    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-                bot.send_audio(Chanal, idmusic, caption_os, reply_markup=linktogroup, parse_mode='Markdown')
-                bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                if call.data == '1011':  # vopros video
+                    button = telebot.types.InlineKeyboardMarkup(row_width=2)
 
-            if call.data == '10':  # vopros Photo
-                button = telebot.types.InlineKeyboardMarkup()
-
-                button1 = types.InlineKeyboardButton(text="✅ - ʙʏ ᴍᴇ", callback_data=999)
-                button2 = types.InlineKeyboardButton(text="ᴍᴇ + ʟɪɴᴋ", callback_data=100016781)
-                button3 = types.InlineKeyboardButton(text="↩ - Exit", callback_data=11)
-                button.add(button1, button2)
-                button.add(button3)
-
-                bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
-
-            if call.data == '11':  # Exit s photo
-                button = types.InlineKeyboardMarkup()
-
-                button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10)
-                button.add(button1)
-
-                bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
-
-
-            if call.data == '1011':  # vopros video
-                button = telebot.types.InlineKeyboardMarkup(row_width=2)
-
-                button1 = types.InlineKeyboardButton(text="✅ - ʙʏ ᴍᴇ", callback_data=998)
-                button2 = types.InlineKeyboardButton(text="↩ - Exit", callback_data=1112)
-                button3 = types.InlineKeyboardButton(text="ᴍᴇ + ʟɪɴᴋ", callback_data=100016783)
-                button.add(button1, button3)
-                button.add(button2)
+                    button1 = types.InlineKeyboardButton(text="✅ - ʙʏ ᴍᴇ", callback_data=998)
+                    button2 = types.InlineKeyboardButton(text="↩ - Exit", callback_data=1112)
+                    button3 = types.InlineKeyboardButton(text="ᴍᴇ + ʟɪɴᴋ", callback_data=100016783)
+                    button.add(button1, button3)
+                    button.add(button2)
 
 
-                bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
+                    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-            if call.data == '1112':  # Exit s video
-                button = types.InlineKeyboardMarkup()
+                if call.data == '1112':  # Exit s video
+                    button = types.InlineKeyboardMarkup()
+                    button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=1011)
+                    button.add(button1)
 
-                button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=1011)
-                button.add(button1)
+                    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-                bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
+                if call.data == '10111':  # vopros music
+                    button = telebot.types.InlineKeyboardMarkup(row_width=2)
 
-            if call.data == '10111':  # vopros music
-                button = telebot.types.InlineKeyboardMarkup(row_width=2)
+                    button1 = types.InlineKeyboardButton(text="✅ - ʙʏ ᴍᴇ", callback_data=997)
+                    button2 = types.InlineKeyboardButton(text="↩ - Exit", callback_data=1112)
+                    button3 = types.InlineKeyboardButton(text="ᴍᴇ + ʟɪɴᴋ", callback_data=100016785)
+                    button.add(button1, button3)
+                    button.add(button2)
 
-                button1 = types.InlineKeyboardButton(text="✅ - ʙʏ ᴍᴇ", callback_data=997)
-                button2 = types.InlineKeyboardButton(text="↩ - Exit", callback_data=1112)
-                button3 = types.InlineKeyboardButton(text="ᴍᴇ + ʟɪɴᴋ", callback_data=100016785)
-                button.add(button1, button3)
-                button.add(button2)
+                    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-                bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
+                if call.data == '11122':  # Exit s mucic
+                    button = types.InlineKeyboardMarkup()
 
-            if call.data == '11122':  # Exit s mucic
-                button = types.InlineKeyboardMarkup()
+                    button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10111)
+                    button.add(button1)
 
-                button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10111)
-                button.add(button1)
+                    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-                bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
+                if call.data == '8678967886':
 
-            if call.data == '8678967886':
+                    keyboard = types.InlineKeyboardMarkup()
 
-                keyboard = types.InlineKeyboardMarkup()
-
-                button1 = types.InlineKeyboardButton("📂 Правила", callback_data='1',
+                    button1 = types.InlineKeyboardButton("📂 Правила", callback_data='1',
                                                      url='https://telegra.ph/Pravila-postinga-v-I061UNMAIN-11-04')
-                button2 = types.InlineKeyboardButton("📑 Что умеет бот?", callback_data='2')
-                button3 = types.InlineKeyboardButton("⚜ Администрация", callback_data='4')
-                keyboard.add(button2)
-                keyboard.add(button1)
-                keyboard.add(button3)
+                    button2 = types.InlineKeyboardButton("📑 Что умеет бот?", callback_data='2')
+                    button3 = types.InlineKeyboardButton("⚜ Администрация", callback_data='4')
+                    keyboard.add(button2)
+                    keyboard.add(button1)
+                    keyboard.add(button3)
 
-                bot.send_message(call.message.chat.id, "*Открыл основное меню!\n➖➖➖➖➖\nНекоторые функции могут быть ещё недоступны...\n➖➖➖➖➖\n*",
+                    bot.send_message(call.message.chat.id, "*Открыл основное меню!\n➖➖➖➖➖\nНекоторые функции могут быть ещё недоступны...\n➖➖➖➖➖\n*",
                                  reply_markup=keyboard, parse_mode='Markdown')
+
+
 
 
 @bot.message_handler(content_types=['text'])
@@ -289,15 +300,14 @@ def photo(message):
         for chri in statuss:
             if chri == bot.get_chat_member(chat_id=Chanal, user_id=message.from_user.id).status:
                 button = telebot.types.InlineKeyboardMarkup()
-
                 button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10)
-                button2 = types.InlineKeyboardButton(text="❌ - ᴅᴇʟᴇᴛᴇ", callback_data=12)
-
-                button.add(button1, button2)
+                button.add(button1)
 
                 caption = "{0}".format(message.from_user.first_name)
 
                 idphoto = message.photo[0].file_id
+                user_id = message.from_user.id
+                db_object.execute(f"UPDATE users SET photo = photo + 1 WHERE id = {user_id}")
 
                 bot.reply_to(message, random.choice(["*✅ - Миссия выполнена, продолжай!*",
                                                  "*✅ - Хорошая работа, Олег!*",
@@ -310,6 +320,7 @@ def photo(message):
                                                  "*✅ - Спасибо, Бро!*",
                                                  "*✅ - Прекрасно!*", ]), parse_mode='Markdown')
                 bot.send_photo(Photobybot2, idphoto, caption, reply_markup=button, parse_mode='Markdown')
+                db_connection.commit()
                 break
         else:
                 caption = "*Вам отказано в доступе 🚫\n➖➖➖\nДля того что бы пользоватся ботом\nПодпишитесь на канал 👇🏻*"
@@ -326,14 +337,12 @@ def video(message):
     for chri in statuss:
         if chri == bot.get_chat_member(chat_id=Chanal, user_id=message.from_user.id).status:
             button = telebot.types.InlineKeyboardMarkup()
-
             button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=1011)
-            button2 = types.InlineKeyboardButton(text="❌ - ᴅᴇʟᴇᴛᴇ", callback_data=1213)
-
-            button.add(button1, button2)
+            button.add(button1)
 
             idvideo = message.video.file_id
-
+            user_id = message.from_user.id
+            db_object.execute(f"UPDATE users SET video = video + 1 WHERE id = {user_id}")
             caption = "{0}".format(message.from_user.first_name)
 
             bot.reply_to(message, random.choice(["*✅ - Миссия выполнена, продолжай!*",
@@ -347,6 +356,7 @@ def video(message):
                                              "*✅ - Спасибо, Бро!*",
                                              "*✅ - Прекрасно!*", ]), parse_mode='Markdown')
             bot.send_video(Photobybot2, idvideo, None, caption, reply_markup=button, parse_mode='Markdown')
+            db_connection.commit()
             break
     else:
             caption = "*Вам отказано в доступе 🚫\n➖➖➖\nДля того что бы пользоватся ботом\nПодпишитесь на канал 👇🏻*"
@@ -364,16 +374,14 @@ def audio(message):
     for chri in statuss:
         if chri == bot.get_chat_member(chat_id=Chanal, user_id=message.from_user.id).status:
             button = telebot.types.InlineKeyboardMarkup()
-
             button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10111)
-            button2 = types.InlineKeyboardButton(text="❌ - ᴅᴇʟᴇᴛᴇ", callback_data=12133)
-
-            button.add(button1, button2)
+            button.add(button1)
 
             caption = "{0}".format(message.from_user.first_name)
 
             idmusic = message.audio.file_id
-
+            user_id = message.from_user.id
+            db_object.execute(f"UPDATE users SET music = music + 1 WHERE id = {user_id}")
             bot.reply_to(message, random.choice(["*✅ - Миссия выполнена, продолжай!*",
                                              "*✅ - Хорошая работа, Олег!*",
                                              "*✅ - Я кончаю, продолжай!*",
@@ -385,6 +393,7 @@ def audio(message):
                                              "*✅ - Спасибо, Бро!*",
                                              "*✅ - Прекрасно!*", ]), parse_mode='Markdown')
             bot.send_audio(Photobybot2, idmusic, caption, reply_markup=button, parse_mode='Markdown')
+            db_connection.commit()
             break
     else:
         caption = "*Вам отказано в доступе 🚫\n➖➖➖\nДля того что бы пользоватся ботом\nПодпишитесь на канал 👇🏻*"
