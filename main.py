@@ -73,7 +73,7 @@ def get_stats(message):
 
 @bot.message_handler(commands=["info"])
 def get_stats(message):
-    db_object.execute(f"SELECT * FROM users WHERE id = {message_from_user.id}")
+    db_object.execute(f"SELECT * FROM users WHERE id = {802515951}")
     result = db_object.fetchall()
     if not result:
         bot.reply_to(message, "No data...")
