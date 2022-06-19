@@ -68,6 +68,7 @@ def iqchery(call):
             id = call.message.caption
             db_object.execute("SELECT * FROM users WHERE id = {0}".format(id))
             result = db_object.fetchall()
+            db_connection.commit()
             if not result:
                 bot.reply_to(call.message, "No data...")
             else:
