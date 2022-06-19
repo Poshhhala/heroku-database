@@ -84,7 +84,7 @@ def iqchery(call):
                         linktogroup5 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌇', url='https://t.me/chupadesubot')
 
                         linktogroup.add(random.choice([linktogroup1, linktogroup2, linktogroup3, linktogroup4,linktogroup5]))
-
+                        db_connection.commit()
                 if call.data == '1': # Умения бота
 
                     exit1 = types.InlineKeyboardMarkup()
@@ -93,7 +93,7 @@ def iqchery(call):
 
                     text1 = "*🤖 Умения бота:\n➖➖➖\nОтправка и Сохранение такого вида контента:\n➖➖➖\nФото ▫️ Видео ▫️ Музыка\n➖➖➖\nНекий % полученого контента - бот отправляет в канал.*"
                     bot.edit_message_text(message_id= call.message.message_id, chat_id=call.message.chat.id, text= text1, reply_markup= exit1, parse_mode='Markdown')
-
+                    db_connection.commit()
                 if call.data == '6': # Кнопка администрации
 
                     keyboard = types.InlineKeyboardMarkup()
@@ -108,7 +108,7 @@ def iqchery(call):
 
                     bot.edit_message_text(chat_id= call.message.chat.id, message_id= call.message.message_id, text = "*Администрация ⛑\n- По вопросам размещение рекламы;\n- Вопросы сотрудничества;\n- Eсли у вас есть какие-то дополнительные идеи по поводу развития проекта;\n💌 Пишите: @lilchupaindesu👇*",
                                  parse_mode='Markdown', reply_markup=keyboard)
-
+                    db_connection.commit()
 
                 if call.data == '999':  # by people
                     db_object.execute(f"UPDATE users SET add = add + 1 WHERE id = {call.message.caption}")
