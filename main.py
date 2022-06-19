@@ -250,8 +250,8 @@ def handle_text(message):
             keyboard = types.InlineKeyboardMarkup()
 
             button1 = types.InlineKeyboardButton("📂 Правила", callback_data='1', url='https://telegra.ph/Pravila-postinga-v-I061UNMAIN-11-04')
-            button2 = types.InlineKeyboardButton("📑 Что умеет бот?", callback_data='2')
-            button3 = types.InlineKeyboardButton("⚜ Администрация", callback_data='4')
+            button2 = types.InlineKeyboardButton("📑 Что умеет бот?", callback_data='1')
+            button3 = types.InlineKeyboardButton("⚜ Администрация", callback_data='6')
 
             keyboard.add(button2)
             keyboard.add(button1)
