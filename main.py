@@ -128,6 +128,9 @@ def iqchery(call):
                     bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok, parse_mode='Markdown')
                     db_connection.commit()
 
+@bot.callback_query_handler(func=lambda call: True)
+def iqchery(call):
+        if call.message:
             if call.data == '10':  # vopros Photo
                     button = telebot.types.InlineKeyboardMarkup()
 
@@ -199,8 +202,6 @@ def iqchery(call):
 
                     bot.send_message(call.message.chat.id, "*Открыл основное меню!\n➖➖➖➖➖\nНекоторые функции могут быть ещё недоступны...\n➖➖➖➖➖\n*",
                                  reply_markup=keyboard, parse_mode='Markdown')
-
-
 
 
 @bot.message_handler(content_types=['text'])
