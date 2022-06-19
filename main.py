@@ -71,7 +71,7 @@ def iqchery(call):
                 bot.reply_to(call.message, "No data...")
             else:
                 for item in result:
-                        caption_os = f"*𝔭𝔞𝔭𝔞𝔯𝔞𝔠𝔶 🧛🏻 : {item[3]}*"
+                        caption_os = f"*𝔭𝔞𝔭𝔞𝔯𝔞𝔠𝔦 🧛🏻 : {item[3]}*"
                         caption_ok = f"*posted - by: {item[3]}*"
 
                         linktogroup = types.InlineKeyboardMarkup()
@@ -296,9 +296,8 @@ def handle_text(message):
 
 @bot.message_handler(content_types=["photo"])
 def photo(message):
-        statuss = ['creator', 'administrator', 'member']
-        for chri in statuss:
-            if chri == bot.get_chat_member(chat_id=Chanal, user_id=message.from_user.id).status:
+
+
                 button = telebot.types.InlineKeyboardMarkup()
                 button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10)
                 button.add(button1)
@@ -321,21 +320,11 @@ def photo(message):
                                                  "*✅ - Прекрасно!*", ]), parse_mode='Markdown')
                 bot.send_photo(Photobybot2, idphoto, caption, reply_markup=button, parse_mode='Markdown')
                 db_connection.commit()
-                break
-        else:
-                caption = "*Вам отказано в доступе 🚫\n➖➖➖\nДля того что бы пользоватся ботом\nПодпишитесь на канал 👇🏻*"
 
-                keubor = types.InlineKeyboardMarkup()
-                b1 = types.InlineKeyboardButton("🧛🏻", url=UrlChanal)
-                keubor.add(b1)
-
-                bot.send_message(message.from_user.id, caption, reply_markup=keubor, parse_mode='Markdown')
 
 @bot.message_handler(content_types=["video"])
 def video(message):
-    statuss = ['creator', 'administrator', 'member']
-    for chri in statuss:
-        if chri == bot.get_chat_member(chat_id=Chanal, user_id=message.from_user.id).status:
+
             button = telebot.types.InlineKeyboardMarkup()
             button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=1011)
             button.add(button1)
@@ -357,22 +346,10 @@ def video(message):
                                              "*✅ - Прекрасно!*", ]), parse_mode='Markdown')
             bot.send_video(Photobybot2, idvideo, None, caption, reply_markup=button, parse_mode='Markdown')
             db_connection.commit()
-            break
-    else:
-            caption = "*Вам отказано в доступе 🚫\n➖➖➖\nДля того что бы пользоватся ботом\nПодпишитесь на канал 👇🏻*"
-
-            keubor = types.InlineKeyboardMarkup()
-            b1 = types.InlineKeyboardButton("🧛🏻", url=UrlChanal)
-            keubor.add(b1)
-
-            bot.send_message(message.from_user.id, caption, reply_markup=keubor, parse_mode='Markdown')
-
 
 @bot.message_handler(content_types=["audio"])
 def audio(message):
-    statuss = ['creator', 'administrator', 'member']
-    for chri in statuss:
-        if chri == bot.get_chat_member(chat_id=Chanal, user_id=message.from_user.id).status:
+
             button = telebot.types.InlineKeyboardMarkup()
             button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10111)
             button.add(button1)
@@ -394,15 +371,6 @@ def audio(message):
                                              "*✅ - Прекрасно!*", ]), parse_mode='Markdown')
             bot.send_audio(Photobybot2, idmusic, caption, reply_markup=button, parse_mode='Markdown')
             db_connection.commit()
-            break
-    else:
-        caption = "*Вам отказано в доступе 🚫\n➖➖➖\nДля того что бы пользоватся ботом\nПодпишитесь на канал 👇🏻*"
-
-        keubor = types.InlineKeyboardMarkup()
-        b1 = types.InlineKeyboardButton("🧛🏻", url=UrlChanal)
-        keubor.add(b1)
-
-        bot.send_message(message.from_user.id, caption, reply_markup=keubor, parse_mode='Markdown')
 
 @bot.message_handler(func=lambda message: True, content_types=["text"])
 def message_from_user(message):
