@@ -55,34 +55,97 @@ def start(message):
 
 
 
-@bot.message_handler(commands=["stats"])
-def get_stats(message):
-    db_object.execute("SELECT * FROM users ORDER BY messages DESC LIMIT 10")
-    result = db_object.fetchall()
+@bot.message_handler(content_types=['text'])
+def handle_text(message):
 
-    if not result:
-        bot.reply_to(message, "No data...")
-    else:
-            reply_message = "Топ 10 спамеров:\n"
-            for i, item in enumerate(result):
-                reply_message += f"{i + 1}. {item[3].strip()}: {item[2]} смс\n"
-            bot.reply_to(message, reply_message)
+        if message.text == "◀️ Exit":
+            keyboard = telebot.types.ReplyKeyboardMarkup(True)
+            button2 = types.KeyboardButton(text="ℹ️Test")
+            button1 = types.KeyboardButton(text="⚙️ Options")
+            keyboard.add(button2, button1)
+            bot.reply_to(message, "*Вернул в основное меню !*", reply_markup=keyboard, parse_mode='Markdown')
 
-    update_messages_count(message.from_user.id)
+        elif message.text == "⚙️ Options":
+            keyboard = telebot.types.ReplyKeyboardMarkup(True)
 
+            button4 = types.KeyboardButton("🗂 More")
+            button10 = types.KeyboardButton("◀️ Exit")
+            button11 = types.KeyboardButton("👤 Profile")
+            keyboard.add(button11, button4)
+            keyboard.add(button10)
+
+            bot.reply_to(message, "*Открыл меню настроек!\n\nВторостепенные команты\nбыли перенесены в / команды.*", reply_markup=keyboard, parse_mode='Markdown')
+
+
+        elif message.text == "ℹ️Test":
+            bot.reply_to(message, "*Бот активен...\n*", parse_mode='Markdown')
+
+
+        elif message.text == "🗂 More":
+            keyboard = types.InlineKeyboardMarkup()
+            button2 = types.InlineKeyboardButton("💡 Новости", callback_data='2')
+
+            button4 = types.InlineKeyboardButton("📂 Правила", callback_data='4',
+                                                 url='https://telegra.ph/Pravila-postinga-v-I061UNMAIN-11-04')
+            button5 = types.InlineKeyboardButton("📑 Что умеет бот?", callback_data='1')
+            button7 = types.InlineKeyboardButton("💸 Помочь проекту", callback_data='7')
+            button6 = types.InlineKeyboardButton("⚜ Администрация", callback_data='6')
+            keyboard.add(button5)
+            keyboard.add(button2, button4)
+            keyboard.add(button7)
+            keyboard.add(button6)
+
+            bot.send_message(message.chat.id, "*Открыл основное меню!\n➖➖➖➖➖\nНекоторые функции могут быть ещё недоступны...\n➖➖➖➖➖\n*",
+                         reply_markup=keyboard, parse_mode='Markdown')
+
+        elif message.text == "👤 Profile":
+            if message.from_user.username == None:
+                id = message.from_user.id
+                db_object.execute("SELECT * FROM users WHERE id = {0}".format(id))
+                result = db_object.fetchall()
+                if not result:
+                    bot.reply_to(message, "No data...")
+                else:
+                    for item in result:
+                        bot.send_message(message.from_user.id, f"{item[1]}")
+
+                update_messages_count(message.from_user.id)
+            else:
+
+                id = message.from_user.id
+                db_object.execute("SELECT * FROM users WHERE id = {0}".format(id))
+                result = db_object.fetchall()
+                if not result:
+                    bot.reply_to(message, "No data...")
+                else:
+                    for item in result:
+                        bot.send_message(message.from_user.id, f"{item[1]}")
+
+                update_messages_count(message.from_user.id)
+        else:
+                cap = random.choice([('*📹 Отправь мне видео...*'),('*🌄 Жду фотографии...*'), ('*🎵 Скинь свой любимый трек*')])
+                bot.delete_message(message.chat.id, message.message_id)
+                bot.send_message(message.chat.id, cap, parse_mode='Markdown')
+
+# @bot.message_handler(commands=["stats"])
+# def get_stats(message):
+#     db_object.execute("SELECT * FROM users ORDER BY messages DESC LIMIT 10")
+#     result = db_object.fetchall()
+#
+#     if not result:
+#         bot.reply_to(message, "No data...")
+#     else:
+#             reply_message = "Топ 10 спамеров:\n"
+#             for i, item in enumerate(result):
+#                 reply_message += f"{i + 1}. {item[3].strip()}: {item[2]} смс\n"
+#             bot.reply_to(message, reply_message)
+#
+#     update_messages_count(message.from_user.id)
+#
 
 @bot.message_handler(commands=["info"])
 def get_stats(message):
-    id = message.from_user.id
-    db_object.execute("SELECT * FROM users WHERE id = {0}".format(id))
-    result = db_object.fetchall()
-    if not result:
-        bot.reply_to(message, "No data...")
-    else:
-            for item in result:
-                bot.send_message(message.from_user.id, f"{item[1]}")
 
-    update_messages_count(message.from_user.id)
 
 
 @bot.message_handler(func=lambda message: True, content_types=["text"])
