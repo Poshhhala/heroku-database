@@ -148,7 +148,6 @@ def handle_text(message):
 
             bot.reply_to(message, "*Вернул в основное меню !*", reply_markup=keyboard, parse_mode='Markdown')
             db_connection.commit()
-
         elif message.text == "ℹ️Test":
             bot.reply_to(message, "*Бот активен...\n*", parse_mode='Markdown')
             db_connection.commit()
@@ -156,7 +155,6 @@ def handle_text(message):
         elif message.text == "‼️Warning ‼️":
             caption = "*Привет, спасибо что начал(а) читать...\n\nБот разложеный на бесплатном сервисе и я не знаю как он будет себя вести.\n\nПеред началом взаимодействий с ботом - прожми ТЕСТ и потожди пока он ответит (он может отправить сразу 2 смс в ответ, это норма), дальше можешь делать свои дела.\n\nОбнял - поцеловал 🫶🏻*"
             bot.reply_to(message, caption, parse_mode='Markdown')
-
 
         elif message.text == "👤 Profile":
 
@@ -195,8 +193,6 @@ def handle_text(message):
 
 @bot.message_handler(content_types=["photo"])
 def photo(message):
-
-
                 button = telebot.types.InlineKeyboardMarkup()
                 button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=999)
                 button.add(button1)
@@ -223,7 +219,6 @@ def photo(message):
 
 @bot.message_handler(content_types=["video"])
 def video(message):
-
             button = telebot.types.InlineKeyboardMarkup()
             button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=998)
             button.add(button1)
@@ -248,7 +243,6 @@ def video(message):
 
 @bot.message_handler(content_types=["audio"])
 def audio(message):
-
             button = telebot.types.InlineKeyboardMarkup()
             button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=997)
             button.add(button1)
