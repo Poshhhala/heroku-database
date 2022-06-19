@@ -191,7 +191,7 @@ def photo(message):
 
 
                 button = telebot.types.InlineKeyboardMarkup()
-                button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10)
+                button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=999)
                 button.add(button1)
 
                 caption = "{0}".format(message.from_user.id)
@@ -218,7 +218,7 @@ def photo(message):
 def video(message):
 
             button = telebot.types.InlineKeyboardMarkup()
-            button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=1011)
+            button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=998)
             button.add(button1)
 
             idvideo = message.video.file_id
@@ -243,7 +243,7 @@ def video(message):
 def audio(message):
 
             button = telebot.types.InlineKeyboardMarkup()
-            button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10111)
+            button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=997)
             button.add(button1)
 
             caption = "{0}".format(message.from_user.id)
