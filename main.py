@@ -79,7 +79,7 @@ def get_stats(message):
         bot.reply_to(message, "No data...")
     else:
             for item in enumerate(result):
-                bot.send_message(message.from_user.id, f"{item[0]}, {item[3]}")
+                bot.send_message(message.from_user.id, f"{item[0]}")
 
     update_messages_count(message.from_user.id)
 
