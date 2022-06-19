@@ -85,30 +85,6 @@ def iqchery(call):
 
                         linktogroup.add(random.choice([linktogroup1, linktogroup2, linktogroup3, linktogroup4,linktogroup5]))
                         db_connection.commit()
-                if call.data == '1': # Умения бота
-
-                    exit1 = types.InlineKeyboardMarkup()
-                    butto1 = types.InlineKeyboardButton('◀️ Exit', callback_data= '8678967886')
-                    exit1.add(butto1)
-
-                    text1 = "*🤖 Умения бота:\n➖➖➖\nОтправка и Сохранение такого вида контента:\n➖➖➖\nФото ▫️ Видео ▫️ Музыка\n➖➖➖\nНекий % полученого контента - бот отправляет в канал.*"
-                    bot.edit_message_text(message_id= call.message.message_id, chat_id=call.message.chat.id, text= text1, reply_markup= exit1, parse_mode='Markdown')
-                    db_connection.commit()
-                if call.data == '6': # Кнопка администрации
-
-                    keyboard = types.InlineKeyboardMarkup()
-
-                    button1 = types.InlineKeyboardButton("Instagram.com",
-                                                         url='https://www.instagram.com/lilromuill/?hl=ru')
-                    button2 = types.InlineKeyboardButton("Telegram.org", url='https://t.me/lilchupaindesu')
-                    butto1 = types.InlineKeyboardButton('◀️ Exit', callback_data='8678967886')
-
-                    keyboard.add(button1, button2)
-                    keyboard.add(butto1)
-
-                    bot.edit_message_text(chat_id= call.message.chat.id, message_id= call.message.message_id, text = "*Администрация ⛑\n- По вопросам размещение рекламы;\n- Вопросы сотрудничества;\n- Eсли у вас есть какие-то дополнительные идеи по поводу развития проекта;\n💌 Пишите: @lilchupaindesu👇*",
-                                 parse_mode='Markdown', reply_markup=keyboard)
-                    db_connection.commit()
 
                 if call.data == '999':  # by people
                     db_object.execute(f"UPDATE users SET add = add + 1 WHERE id = {call.message.caption}")
@@ -152,7 +128,7 @@ def iqchery(call):
                     bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok, parse_mode='Markdown')
                     db_connection.commit()
 
-                if call.data == '10':  # vopros Photo
+            if call.data == '10':  # vopros Photo
                     button = telebot.types.InlineKeyboardMarkup()
 
                     button1 = types.InlineKeyboardButton(text="✅ - ʙʏ ᴍᴇ", callback_data=999)
@@ -163,7 +139,7 @@ def iqchery(call):
 
                     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-                if call.data == '11':  # Exit s photo
+            if call.data == '11':  # Exit s photo
                     button = types.InlineKeyboardMarkup()
 
                     button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10)
@@ -171,7 +147,7 @@ def iqchery(call):
 
                     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-                if call.data == '1011':  # vopros video
+            if call.data == '1011':  # vopros video
                     button = telebot.types.InlineKeyboardMarkup(row_width=2)
 
                     button1 = types.InlineKeyboardButton(text="✅ - ʙʏ ᴍᴇ", callback_data=998)
@@ -183,14 +159,14 @@ def iqchery(call):
 
                     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-                if call.data == '1112':  # Exit s video
+            if call.data == '1112':  # Exit s video
                     button = types.InlineKeyboardMarkup()
                     button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=1011)
                     button.add(button1)
 
                     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-                if call.data == '10111':  # vopros music
+            if call.data == '10111':  # vopros music
                     button = telebot.types.InlineKeyboardMarkup(row_width=2)
 
                     button1 = types.InlineKeyboardButton(text="✅ - ʙʏ ᴍᴇ", callback_data=997)
@@ -201,7 +177,7 @@ def iqchery(call):
 
                     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-                if call.data == '11122':  # Exit s mucic
+            if call.data == '11122':  # Exit s mucic
                     button = types.InlineKeyboardMarkup()
 
                     button1 = types.InlineKeyboardButton(text="✅ - Post", callback_data=10111)
@@ -209,7 +185,7 @@ def iqchery(call):
 
                     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=button)
 
-                if call.data == '8678967886':
+            if call.data == '8678967886':
 
                     keyboard = types.InlineKeyboardMarkup()
 
@@ -224,7 +200,7 @@ def iqchery(call):
                     bot.send_message(call.message.chat.id, "*Открыл основное меню!\n➖➖➖➖➖\nНекоторые функции могут быть ещё недоступны...\n➖➖➖➖➖\n*",
                                  reply_markup=keyboard, parse_mode='Markdown')
 
-            db_connection.commit()
+
 
 
 @bot.message_handler(content_types=['text'])
