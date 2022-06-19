@@ -92,7 +92,7 @@ def iqchery(call):
                             db_object.execute(f"UPDATE users SET add = add + 1 WHERE id = {call.message.caption}")
                             idphoto = call.message.photo[0].file_id
                             bot.send_photo(Chanal, idphoto, caption_os, parse_mode='Markdown')
-                            bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                            bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok, parse_mode='Markdown')
                             db_connection.commit()
 
                         if call.data == '998':  # by people
