@@ -223,7 +223,7 @@ def iqchery(call):
                     bot.send_message(call.message.chat.id, "*Открыл основное меню!\n➖➖➖➖➖\nНекоторые функции могут быть ещё недоступны...\n➖➖➖➖➖\n*",
                                  reply_markup=keyboard, parse_mode='Markdown')
 
-
+            db_connection.commit()
 
 
 @bot.message_handler(content_types=['text'])
