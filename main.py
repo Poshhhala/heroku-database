@@ -76,11 +76,11 @@ def iqchery(call):
 
                         linktogroup = types.InlineKeyboardMarkup()
 
-                        linktogroup1 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌉', url='https://t.me/onlybabay_bot')
-                        linktogroup2 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌄', url='https://t.me/onlybabay_bot')
-                        linktogroup3 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌅', url='https://t.me/onlybabay_bot')
-                        linktogroup4 = types.InlineKeyboardButton(text='Поделиться своим контентом 🎆', url='https://t.me/onlybabay_bot')
-                        linktogroup5 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌇', url='https://t.me/onlybabay_bot')
+                        linktogroup1 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌉', url='https://t.me/chupadesubot')
+                        linktogroup2 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌄', url='https://t.me/chupadesubot')
+                        linktogroup3 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌅', url='https://t.me/chupadesubot')
+                        linktogroup4 = types.InlineKeyboardButton(text='Поделиться своим контентом 🎆', url='https://t.me/chupadesubot')
+                        linktogroup5 = types.InlineKeyboardButton(text='Поделиться своим контентом 🌇', url='https://t.me/chupadesubot')
 
                         linktogroup.add(random.choice([linktogroup1, linktogroup2, linktogroup3, linktogroup4,linktogroup5]))
 
@@ -120,35 +120,35 @@ def iqchery(call):
                     db_object.execute(f"UPDATE users SET add = add + 1 WHERE id = {call.message.caption}")
                     idvideo = call.message.video.file_id
                     bot.send_video(Chanal, idvideo, None, caption_os, parse_mode='Markdown')
-                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok, parse_mode='Markdown')
                     db_connection.commit()
 
                 if call.data == '997':  # by people
                     db_object.execute(f"UPDATE users SET add = add + 1 WHERE id = {call.message.caption}")
                     idmusic = call.message.audio.file_id
                     bot.send_audio(Chanal, idmusic, caption_os, parse_mode='Markdown')
-                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok, parse_mode='Markdown')
                     db_connection.commit()
 
                 if call.data == '100016781':  # by people + link
                     db_object.execute(f"UPDATE users SET add = add + 1 WHERE id = {call.message.caption}")
                     idphoto = call.message.photo[0].file_id
                     bot.send_photo(Chanal, idphoto, caption_os, reply_markup=linktogroup,parse_mode='Markdown')
-                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok, parse_mode='Markdown')
                     db_connection.commit()
 
                 if call.data == '100016783':  # by people + link
                     db_object.execute(f"UPDATE users SET add = add + 1 WHERE id = {call.message.caption}")
                     idvideo = call.message.video.file_id
                     bot.send_video(Chanal, idvideo, None, caption_os, reply_markup=linktogroup,parse_mode='Markdown')
-                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok, parse_mode='Markdown')
                     db_connection.commit()
 
                 if call.data == '100016785':  # by people + link
                     db_object.execute(f"UPDATE users SET add = add + 1 WHERE id = {call.message.caption}")
                     idmusic = call.message.audio.file_id
                     bot.send_audio(Chanal, idmusic, caption_os, reply_markup=linktogroup, parse_mode='Markdown')
-                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
+                    bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok, parse_mode='Markdown')
                     db_connection.commit()
 
                 if call.data == '10':  # vopros Photo
