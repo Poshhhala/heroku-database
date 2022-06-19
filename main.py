@@ -110,42 +110,42 @@ def iqchery(call):
 
 
                 if call.data == '999':  # by people
-                    db_object.execute(f"UPDATE users SET photo = photo + 1 WHERE id = {call.user_id}")
+                    db_object.execute(f"UPDATE users SET photo = photo + 1 WHERE id = {call.message.caption}")
                     idphoto = call.message.photo[0].file_id
                     bot.send_photo(Chanal, idphoto, caption_os, parse_mode='Markdown')
                     bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
                     db_connection.commit()
 
                 if call.data == '998':  # by people
-                    db_object.execute(f"UPDATE users SET video = video + 1 WHERE id = {call.user_id}")
+                    db_object.execute(f"UPDATE users SET video = video + 1 WHERE id = {call.message.caption}")
                     idvideo = call.message.video.file_id
                     bot.send_video(Chanal, idvideo, None, caption_os, parse_mode='Markdown')
                     bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
                     db_connection.commit()
 
                 if call.data == '997':  # by people
-                    db_object.execute(f"UPDATE users SET music = music + 1 WHERE id = {call.user_id}")
+                    db_object.execute(f"UPDATE users SET music = music + 1 WHERE id = {call.message.caption}")
                     idmusic = call.message.audio.file_id
                     bot.send_audio(Chanal, idmusic, caption_os, parse_mode='Markdown')
                     bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
                     db_connection.commit()
 
                 if call.data == '100016781':  # by people + link
-                    db_object.execute(f"UPDATE users SET photo = photo + 1 WHERE id = {call.user_id}")
+                    db_object.execute(f"UPDATE users SET photo = photo + 1 WHERE id = {call.message.caption}")
                     idphoto = call.message.photo[0].file_id
                     bot.send_photo(Chanal, idphoto, caption_os, reply_markup=linktogroup,parse_mode='Markdown')
                     bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
                     db_connection.commit()
 
                 if call.data == '100016783':  # by people + link
-                    db_object.execute(f"UPDATE users SET video = video + 1 WHERE id = {call.user_id}")
+                    db_object.execute(f"UPDATE users SET video = video + 1 WHERE id = {call.message.caption}")
                     idvideo = call.message.video.file_id
                     bot.send_video(Chanal, idvideo, None, caption_os, reply_markup=linktogroup,parse_mode='Markdown')
                     bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
                     db_connection.commit()
 
                 if call.data == '100016785':  # by people + link
-                    db_object.execute(f"UPDATE users SET music = music + 1 WHERE id = {call.user_id}")
+                    db_object.execute(f"UPDATE users SET music = music + 1 WHERE id = {call.message.caption}")
                     idmusic = call.message.audio.file_id
                     bot.send_audio(Chanal, idmusic, caption_os, reply_markup=linktogroup, parse_mode='Markdown')
                     bot.edit_message_caption(chat_id=call.message.chat.id, message_id=call.message.message_id, caption=caption_ok)
