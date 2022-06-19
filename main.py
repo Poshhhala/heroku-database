@@ -107,8 +107,8 @@ def handle_text(message):
                     bot.reply_to(message, "No data...")
                 else:
                     for item in result:
-                        bot.send_message(message.from_user.id, f"{item[1]}")
-                        caption = f"*👤 {item[3]} - @{item[2]}\n➖➖➖➖➖\n📊 Твоя личная статистика\n✅ Всего одобрено в группу: {item[7]}\n➖➖➖➖➖\n🌄 Фотографии: {item[4]}\n📹 Видео: {item[5]}\n🎵 Музыка: {item[6]}\n➖➖➖➖➖\n*"
+
+                        caption = f"*👤 {item[3]} - @{item[1]}\n➖➖➖➖➖\n📊 Твоя личная статистика\n✅ Всего одобрено в группу: {item[7]}\n➖➖➖➖➖\n🌄 Фотографии: {item[4]}\n📹 Видео: {item[5]}\n🎵 Музыка: {item[6]}\n➖➖➖➖➖\n*"
                         bot.send_message(message.chat.id, caption, parse_mode='Markdown')
                 update_messages_count(message.from_user.id)
         else:
