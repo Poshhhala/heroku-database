@@ -32,17 +32,19 @@ def start(message):
     userfirst = message.from_user.first_name
     username = message.from_user.username
     photo = 'https://vk.com/deluxe_in_mainstream?z=photo-58122416_457239128%2Falbum-58122416_00%2Frev'
-    dist = 'Привет, бот на стадии разработки...'
+    dist = '*Привет, бот на стадии разработки...\nДля предотвращения ошибок рекомендую прочитать ‼предупреждение*'
 
     keyboard = telebot.types.ReplyKeyboardMarkup(True)
 
     button1 = types.KeyboardButton(text="ℹ️Test")
     button2 = types.KeyboardButton(text="👤 Profile")
+    button3 = types.KeyboardButton(text="‼️Warning ‼️")
 
 
     keyboard.add(button1,button2)
+    keyboard.add(button3)
 
-    bot.send_photo(message.from_user.id, photo , dist, reply_markup=keyboard)
+    bot.send_photo(message.from_user.id, photo , dist, reply_markup=keyboard, parse_mode='Markdown')
 
     db_object.execute(f"SELECT id FROM users WHERE id = {user_id}")
     result = db_object.fetchone()
@@ -141,15 +143,20 @@ def handle_text(message):
             button1 = types.KeyboardButton(text="ℹ️Test")
             button2 = types.KeyboardButton(text="👤 Profile")
 
+
             keyboard.add(button1, button2)
 
             bot.reply_to(message, "*Вернул в основное меню !*", reply_markup=keyboard, parse_mode='Markdown')
             db_connection.commit()
 
-
         elif message.text == "ℹ️Test":
             bot.reply_to(message, "*Бот активен...\n*", parse_mode='Markdown')
             db_connection.commit()
+
+        elif message.text == "‼️Warning ‼️":
+            caption = "*Привет, спасибо что начал читать...\n\nБот разложеный на бесплатном сервисе и я не знаю как он будет себя вести.\n\nПеред там как отправить боту контент всегда нажимай ТЕСТ и потожди когда он ответит (он может отправить сразу 2 смс в ответ, это норма), дальше можешь делать свои дела\n\n Обнял - поцеловал 🫶🏻*"
+            bot.reply_to(message, caption, parse_mode='Markdown')
+
 
         elif message.text == "👤 Profile":
 
